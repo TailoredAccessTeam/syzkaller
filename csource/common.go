@@ -24,11 +24,13 @@ var commonHeader = `
 #include <linux/kvm.h>
 #include <linux/sched.h>
 
-#include <arpa/inet.h>
 #include <linux/if.h>
 #include <linux/if_ether.h>
 #include <linux/if_tun.h>
 #include <linux/ip.h>
+#include <linux/ipv6.h>
+#include <linux/in.h>
+#include <linux/in6.h>
 #include <linux/tcp.h>
 #include <net/if_arp.h>
 
@@ -307,18 +309,27 @@ static uintptr_t syz_emit_ethernet(uintptr_t a0, uintptr_t a1)
 #endif
 
 #ifdef __NR_syz_extract_tcp_res
-struct ipv6hdr {
-	__u8 priority : 4,
-	    version : 4;
-	__u8 flow_lbl[3];
-
-	__be16 payload_len;
-	__u8 nexthdr;
-	__u8 hop_limit;
-
-	struct in6_addr saddr;
-	struct in6_addr daddr;
-};
+#if BYTE_ORDER == LITTLE_ENDIAN
+uint16_t htons(uint16_t v) {
+	return (v >> 8) | (v << 8);
+}
+uint32_t htonl(uint32_t v) {
+	return htons(v >> 16) | (htons((uint16_t) v) << 16);
+}
+#else
+uint16_t htons(uint16_t v) {
+	return v;
+}
+uint32_t htonl(uint32_t v) {
+	return v;
+}
+#endif
+uint16_t ntohs(uint16_t v) {
+	return htons(v);
+}
+uint32_t ntohl(uint32_t v) {
+	return htonl(v);
+}
 
 struct tcp_resources {
 	int32_t seq;
