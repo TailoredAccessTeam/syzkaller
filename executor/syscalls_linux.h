@@ -2,11 +2,11 @@
 
 #if defined(__i386__) || 0
 #define GOARCH "386"
-#define SYZ_REVISION "84c53d32853cc775f2dfd37019d57297db7f2b3b"
+#define SYZ_REVISION "5b5da2c30a81f8cb61dff2a15433d672f9c023df"
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
-unsigned syscall_count = 1701;
+unsigned syscall_count = 1703;
 call_t syscalls[] = {
     {"accept4", 364},
     {"accept4$alg", 364},
@@ -1657,6 +1657,8 @@ call_t syscalls[] = {
     {"syz_open_procfs", 0, (syscall_t)syz_open_procfs},
     {"syz_open_pts", 0, (syscall_t)syz_open_pts},
     {"syz_read_part_table", 0, (syscall_t)syz_read_part_table},
+    {"syz_usb_connect", 0, (syscall_t)syz_usb_connect},
+    {"syz_usb_disconnect", 0, (syscall_t)syz_usb_disconnect},
     {"tee", 315},
     {"tgkill", 270},
     {"time", 13},
@@ -1715,11 +1717,11 @@ call_t syscalls[] = {
 
 #if defined(__x86_64__) || 0
 #define GOARCH "amd64"
-#define SYZ_REVISION "5e7ba513507e7d4f521debef48179bff8c5a38a5"
+#define SYZ_REVISION "c0c7f87365161f6838d63312de4fe30c99d77c0d"
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
-unsigned syscall_count = 1753;
+unsigned syscall_count = 1755;
 call_t syscalls[] = {
     {"accept", 43},
     {"accept$alg", 43},
@@ -3422,6 +3424,8 @@ call_t syscalls[] = {
     {"syz_open_procfs", 0, (syscall_t)syz_open_procfs},
     {"syz_open_pts", 0, (syscall_t)syz_open_pts},
     {"syz_read_part_table", 0, (syscall_t)syz_read_part_table},
+    {"syz_usb_connect", 0, (syscall_t)syz_usb_connect},
+    {"syz_usb_disconnect", 0, (syscall_t)syz_usb_disconnect},
     {"tee", 276},
     {"tgkill", 234},
     {"time", 201},
@@ -3480,11 +3484,11 @@ call_t syscalls[] = {
 
 #if defined(__arm__) || 0
 #define GOARCH "arm"
-#define SYZ_REVISION "2dbd32257faac18a8dba1d81c18741ca6b74d3a1"
+#define SYZ_REVISION "e362f69d45de0ce5059fba1247e1ec18b56db4d5"
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
-unsigned syscall_count = 1710;
+unsigned syscall_count = 1712;
 call_t syscalls[] = {
     {"accept", 285},
     {"accept$alg", 285},
@@ -5146,6 +5150,8 @@ call_t syscalls[] = {
     {"syz_open_procfs", 0, (syscall_t)syz_open_procfs},
     {"syz_open_pts", 0, (syscall_t)syz_open_pts},
     {"syz_read_part_table", 0, (syscall_t)syz_read_part_table},
+    {"syz_usb_connect", 0, (syscall_t)syz_usb_connect},
+    {"syz_usb_disconnect", 0, (syscall_t)syz_usb_disconnect},
     {"tee", 342},
     {"tgkill", 268},
     {"timer_create", 257},
@@ -5202,11 +5208,11 @@ call_t syscalls[] = {
 
 #if defined(__aarch64__) || 0
 #define GOARCH "arm64"
-#define SYZ_REVISION "bdb5ff7dcca0446c041419cf514f1776d90e641e"
+#define SYZ_REVISION "169e59e0b0da4f8cebc2f11946f8de943e18a4f6"
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
-unsigned syscall_count = 1682;
+unsigned syscall_count = 1684;
 call_t syscalls[] = {
     {"accept", 202},
     {"accept$alg", 202},
@@ -6844,6 +6850,8 @@ call_t syscalls[] = {
     {"syz_open_procfs", 0, (syscall_t)syz_open_procfs},
     {"syz_open_pts", 0, (syscall_t)syz_open_pts},
     {"syz_read_part_table", 0, (syscall_t)syz_read_part_table},
+    {"syz_usb_connect", 0, (syscall_t)syz_usb_connect},
+    {"syz_usb_disconnect", 0, (syscall_t)syz_usb_disconnect},
     {"tee", 77},
     {"tgkill", 131},
     {"timer_create", 107},
@@ -6896,11 +6904,11 @@ call_t syscalls[] = {
 
 #if defined(__ppc64__) || defined(__PPC64__) || defined(__powerpc64__) || 0
 #define GOARCH "ppc64le"
-#define SYZ_REVISION "6d59aca8cdd36f9b01a0a0b4406b2e88a5eb429d"
+#define SYZ_REVISION "345d64c6500f1a170a51d8dd967c509580d175c8"
 #define SYZ_PAGE_SIZE 4096
 #define SYZ_NUM_PAGES 4096
 #define SYZ_DATA_OFFSET 536870912
-unsigned syscall_count = 1672;
+unsigned syscall_count = 1674;
 call_t syscalls[] = {
     {"accept", 330},
     {"accept$alg", 330},
@@ -8522,6 +8530,8 @@ call_t syscalls[] = {
     {"syz_open_procfs", 0, (syscall_t)syz_open_procfs},
     {"syz_open_pts", 0, (syscall_t)syz_open_pts},
     {"syz_read_part_table", 0, (syscall_t)syz_read_part_table},
+    {"syz_usb_connect", 0, (syscall_t)syz_usb_connect},
+    {"syz_usb_disconnect", 0, (syscall_t)syz_usb_disconnect},
     {"tee", 284},
     {"tgkill", 250},
     {"time", 13},

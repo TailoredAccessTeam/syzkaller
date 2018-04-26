@@ -36,6 +36,8 @@ __attribute__((noreturn)) static void doexit(int status)
 
 
 
+#define SYZ_USB_ENABLE
+
 #include <stdint.h>
 #include <string.h>
 #if defined(SYZ_EXECUTOR) || (defined(SYZ_REPEAT) && defined(SYZ_WAIT_REPEAT)) ||               \
@@ -101,7 +103,7 @@ extern unsigned syscall_count;
 #if defined(SYZ_EXECUTOR) || (defined(SYZ_REPEAT) && defined(SYZ_WAIT_REPEAT)) ||               \
     defined(SYZ_USE_TMP_DIR) || defined(SYZ_TUN_ENABLE) || defined(SYZ_SANDBOX_NAMESPACE) ||    \
     defined(SYZ_SANDBOX_NONE) || defined(SYZ_SANDBOX_SETUID) || defined(SYZ_FAULT_INJECTION) || \
-    defined(__NR_syz_kvm_setup_cpu)
+    defined(SYZ_USB_ENABLE) || defined(__NR_syz_kvm_setup_cpu)
 const int kFailStatus = 67;
 const int kRetryStatus = 69;
 #endif
@@ -110,10 +112,11 @@ const int kRetryStatus = 69;
 const int kErrorStatus = 68;
 #endif
 
-#if defined(SYZ_EXECUTOR) || (defined(SYZ_REPEAT) && defined(SYZ_WAIT_REPEAT)) ||                  \
-    defined(SYZ_USE_TMP_DIR) || defined(SYZ_TUN_ENABLE) || defined(SYZ_SANDBOX_NAMESPACE) ||       \
-    defined(SYZ_SANDBOX_NONE) || defined(SYZ_SANDBOX_SETUID) || defined(__NR_syz_kvm_setup_cpu) || \
-    defined(__NR_syz_init_net_socket) &&                                                           \
+#if defined(SYZ_EXECUTOR) || (defined(SYZ_REPEAT) && defined(SYZ_WAIT_REPEAT)) ||            \
+    defined(SYZ_USE_TMP_DIR) || defined(SYZ_TUN_ENABLE) || defined(SYZ_SANDBOX_NAMESPACE) || \
+    defined(SYZ_SANDBOX_NONE) || defined(SYZ_SANDBOX_SETUID) || defined(SYZ_USB_ENABLE) ||   \
+    defined(__NR_syz_kvm_setup_cpu) ||                                                       \
+    defined(__NR_syz_init_net_socket) &&                                                     \
 	(defined(SYZ_SANDBOX_NONE) || defined(SYZ_SANDBOX_SETUID) || defined(SYZ_SANDBOX_NAMESPACE))
 NORETURN PRINTF static void fail(const char* msg, ...)
 {
