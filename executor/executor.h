@@ -22,7 +22,7 @@
 
 const int kMaxInput = 2 << 20;
 const int kMaxOutput = 16 << 20;
-const int kCoverSize = 256 << 10;
+const int kCoverSize = 1024 << 10; // TODO: 512
 const int kMaxArgs = 9;
 const int kMaxThreads = 16;
 const int kMaxCommands = 1000;
@@ -258,10 +258,16 @@ void receive_execute(bool need_prog)
 	flag_fault_nth = req.fault_nth;
 	if (!flag_threaded)
 		flag_collide = false;
+
 	debug("exec opts: pid=%llu threaded=%d collide=%d cover=%d comps=%d dedup=%d fault=%d/%d/%d prog=%llu\n",
 	      procid, flag_threaded, flag_collide, flag_collect_cover, flag_collect_comps,
 	      flag_dedup_cover, flag_inject_fault, flag_fault_call, flag_fault_nth,
 	      req.prog_size);
+
+	flag_threaded = 0;
+	flag_collide = 0;
+	flag_collect_comps = 0;
+
 	if (req.prog_size == 0) {
 		if (need_prog)
 			fail("need_prog: no program");
@@ -590,6 +596,9 @@ void handle_completion(thread_t* th)
 		*comps_count_pos = comps_size;
 		// Write out number of signals
 		*signal_count_pos = nsig;
+
+		debug("th->cover_size: %d, cover_size: %d, flag: %d\n", (int)th->cover_size, (int)cover_size, (int)flag_collect_cover);
+
 		debug("out #%u: index=%u num=%u errno=%d sig=%u cover=%u comps=%u\n",
 		      completed, th->call_index, th->call_num, reserrno, nsig,
 		      cover_size, comps_size);
@@ -654,6 +663,8 @@ void execute_call(thread_t* th)
 		th->reserrno = EINVAL; // our syz syscalls may misbehave
 	th->cover_size = read_cover_size(th);
 	th->fault_injected = false;
+
+	debug("collected cover size for %s: %d\n", call->name, (int)th->cover_size);
 
 	if (flag_inject_fault && th->call_index == flag_fault_call) {
 		th->fault_injected = fault_injected(fail_fd);

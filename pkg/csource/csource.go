@@ -171,13 +171,13 @@ func Write(p *prog.Prog, opts Options) ([]byte, error) {
 	// Remove NONFAILING and debug calls.
 	result := ctx.w.Bytes()
 	if !opts.HandleSegv {
-		re := regexp.MustCompile(`\t*NONFAILING\((.*)\);\n`)
+		re := regexp.MustCompile(`(?sU)\t*NONFAILING\((.*)\);\n`)
 		result = re.ReplaceAll(result, []byte("$1;\n"))
 	}
 	if !opts.Debug {
-		re := regexp.MustCompile(`\t*debug\(.*\);\n`)
+		re := regexp.MustCompile(`(?sU)\t*debug\(.*\);\n`)
 		result = re.ReplaceAll(result, nil)
-		re = regexp.MustCompile(`\t*debug_dump_data\(.*\);\n`)
+		re = regexp.MustCompile(`(?sU)\t*debug_dump_data\(.*\);\n`)
 		result = re.ReplaceAll(result, nil)
 	}
 	result = bytes.Replace(result, []byte("NORETURN"), nil, -1)

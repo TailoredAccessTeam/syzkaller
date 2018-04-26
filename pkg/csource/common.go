@@ -89,6 +89,7 @@ func defineList(p *prog.Prog, opts Options) ([]string, error) {
 	if opts.EnableTun {
 		defines = append(defines, "SYZ_TUN_ENABLE")
 	}
+	defines = append(defines, "SYZ_USB_ENABLE") // TODO
 	if opts.EnableCgroups {
 		defines = append(defines, "SYZ_ENABLE_CGROUPS")
 	}

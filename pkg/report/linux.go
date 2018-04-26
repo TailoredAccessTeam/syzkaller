@@ -906,6 +906,11 @@ var linuxOopses = []*oops{
 				fmt:          "WARNING: kernel stack regs has bad value",
 				noStackTrace: true,
 			},
+			{
+				title:  compile("WARNING: .*usb_submit_urb"),
+				report: compile("WARNING: .*usb_submit_urb.*\\n(?:.*\\n)+?.*RIP.*usb_submit_urb.*\\n(?:.*\\n)+? {{FUNC}}"),
+				fmt:    "WARNING in %[1]v/usb_submit_urb",
+			},
 		},
 		[]*regexp.Regexp{
 			compile("WARNING: /etc/ssh/moduli does not exist, using fixed modulus"), // printed by sshd

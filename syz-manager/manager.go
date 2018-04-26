@@ -239,8 +239,8 @@ func RunManager(cfg *mgrconfig.Config, target *prog.Target, syscalls map[int]boo
 		})
 	}
 	mgr.fresh = len(mgr.corpusDB.Records) == 0
-	Logf(0, "loaded %v programs (%v total, %v deleted)",
-		len(mgr.candidates), len(mgr.corpusDB.Records), deleted)
+	Logf(0, "loaded %v programs (%v total, %v deleted), minimized: %v",
+		len(mgr.candidates), len(mgr.corpusDB.Records), deleted, minimized)
 
 	// Now this is ugly.
 	// We duplicate all inputs in the corpus and shuffle the second part.
